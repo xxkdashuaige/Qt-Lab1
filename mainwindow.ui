@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>带键盘事件的计算器</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <property name="sizePolicy">
@@ -250,6 +250,9 @@
       </item>
       <item row="0" column="0" colspan="4">
        <widget class="QLineEdit" name="display">
+        <property name="text">
+         <string>0</string>
+        </property>
         <property name="sizePolicy">
          <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
           <horstretch>0</horstretch>

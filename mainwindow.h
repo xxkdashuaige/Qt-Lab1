@@ -2,32 +2,47 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include <QVector>
+#include <QString>
+
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
+
+class QKeyEvent;
 
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
 
 public:
-    MainWindow(QWidget *parent = nullptr);
-    ~MainWindow();
-    QString calculation(bool *ok);
+    explicit MainWindow(QWidget *parent = nullptr);
+    ~MainWindow() override;
 
-private slots:
-    void btnNumClicked();
-    void btnBinaryOperatorClicked();
-    void on_btnPeroid_clicked();
-    void on_btnDel_clicked();
-    void on_btnClearAll_clicked();
-    void on_btnEqual_clicked(); // btnEqual自动槽
+protected:
+    // 将键盘输入转换成与鼠标按钮相同的命令，复用统一处理逻辑。
+    void keyPressEvent(QKeyEvent *event) override;
 
 private:
+    void handleToken(const QString &token);
+    void inputDigit(const QString &digit);
+    void inputDecimalPoint();
+    void chooseOperator(const QString &op);
+    void calculateResult();
+    void applyUnaryOperator(const QString &op);
+    void backspace();
+    void clearEntry();
+    void clearAll();
+    bool calculate(double left, double right, const QString &op, double *result);
+    void updateDisplay();
+    void showError(const QString &message);
+
     Ui::MainWindow *ui;
-    QString operand;           // 当前正在输入的数字
-    QVector<double> operands;  // 存放操作数
-    QVector<QString> opcodes;  // 存放运算符
+    QString currentInput;
+    QString pendingOperator;
+    double pendingValue = 0.0;
+    bool waitingForOperand = true;
+    bool resultShown = false;
+    bool errorState = false;
 };
+
 #endif // MAINWINDOW_H
