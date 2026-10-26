@@ -12,6 +12,56 @@ MainWindow::MainWindow(QWidget *parent)
     , currentInput("0")
 {
     ui->setupUi(this);
+
+    this->setStyleSheet(R"(
+    QMainWindow {
+        background-color: #111827;
+    }
+
+    QWidget {
+        color: #F9FAFB;
+        font-family: "Microsoft YaHei";
+    }
+
+    QLineEdit {
+        background-color: #1F2937;
+        color: #FFFFFF;
+        border: 1px solid #374151;
+        border-radius: 12px;
+        padding: 12px;
+        font-size: 30px;
+        selection-background-color: #2563EB;
+    }
+
+    QPushButton {
+        background-color: #273449;
+        color: #F9FAFB;
+        border: 1px solid #374151;
+        border-radius: 10px;
+        padding: 8px;
+        font-size: 19px;
+        min-height: 38px;
+    }
+
+    QPushButton:hover {
+        background-color: #475569;
+        border: 1px solid #64748B;
+    }
+
+    QPushButton:pressed {
+        background-color: #64748B;
+    }
+
+    QStatusBar {
+        background-color: #111827;
+        color: #9CA3AF;
+    }
+
+    QStatusBar::item {
+        border: none;
+    }
+)");
+
     setWindowTitle(QStringLiteral("带键盘事件的计算器"));
     setMinimumSize(360, 420);
 
